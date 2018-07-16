@@ -1,0 +1,15 @@
+{
+  "db": {
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "dialect": "mysql"
+  },
+  "btc": {
+  	"host": "127.0.0.1",
+  	"port": 8332,
+  	"username": "username",
+  	"password": "password"
+  }
+}
