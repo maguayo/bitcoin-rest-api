@@ -47,7 +47,11 @@ router.get('/', function(req, res, next) {
 					console.log(result)
 					res.send({"success": true, "result": result})
 					console.log("====")
+				}).catch(function(err){
+					console.log(err);
 				});
+			}).catch(function(err){
+				console.log(err);
 			});
 
 		}
