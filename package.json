@@ -36,7 +36,7 @@
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
-    "node-bitcoin-rpc": "^1.1.3",
+    "node-bitcoin-rpc": "https://github.com/maguayo/node-bitcoin-rpc/tarball/master",
     "node-rest-client": "^3.1.0",
     "npm": "^6.0.0",
     "path": "^0.12.7",
