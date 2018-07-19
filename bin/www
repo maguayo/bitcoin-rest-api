@@ -8,7 +8,12 @@ var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
 var chalk = require('chalk');
+const socketIO = require('socket.io')
+const io = socketIO(server)
+const zmq = require('zmq')
+  , sock = zmq.socket('pull');
 
+  
 /**
  * Get port from environment and store in Express.
  */
@@ -34,6 +39,26 @@ server.listen(port, () => {
 
 server.on('error', onError);
 server.on('listening', onListening);
+
+ 
+sock.connect('tcp://127.0.0.1:28332');
+console.log('Worker connected to port 28332');
+
+
+// This is what the socket.io syntax is like, we will work this later
+io.on('connection', socket => {
+  console.log('New client connected')
+
+  sock.on('message', function(msg){
+    console.log('work: %s', msg.toString());
+    io.sockets.emit('change tx', msg.toString())
+  });
+  
+  // disconnect is fired when a client leaves the server
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+})
 
 /**
  * Normalize a port into a number, string, or false.
