@@ -10,7 +10,7 @@ var http = require('http');
 var chalk = require('chalk');
 const socketIO = require('socket.io')
 const io = socketIO(server)
-const zmq = require('zmq')
+const zmq = require('zeromq')
   , sock = zmq.socket('pull');
 
   
