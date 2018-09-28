@@ -108,10 +108,6 @@ router.get('/:hashOrHeigth', function(req, res, next) {
 
 	var hashOrHeigth = req.params.hashOrHeigth;
 	var is_heigth = !isNaN(hashOrHeigth);
-	var raw = req.query.raw;
-	if(!raw){
-		raw = 1
-	}
 
 	bitcoin_rpc.init(config.btc.host, config.btc.port, config.btc.username, config.btc.password)
 
@@ -140,7 +136,7 @@ router.get('/:hashOrHeigth', function(req, res, next) {
 			}
 		})
 	}else{
-		bitcoin_rpc.call('getblock', [hashOrHeigth, raw], function (err, resp) {
+		bitcoin_rpc.call('getblock', [hashOrHeigth], function (err, resp) {
 			if (err) {
 				res.send({"success": false, "msg": "Can't get the block info.", "err": err})
 			} else {
@@ -151,5 +147,24 @@ router.get('/:hashOrHeigth', function(req, res, next) {
 	}
 
 });
+
+
+
+router.get('/:hash/raw', function(req, res, next) {
+
+	bitcoin_rpc.init(config.btc.host, config.btc.port, config.btc.username, config.btc.password)
+	bitcoin_rpc.call('getblock', [hashOrHeigth, 0], function (err, resp) {
+		if (err) {
+			res.send({"success": false, "msg": "Can't get the block info.", "err": err})
+		} else {
+			console.log(resp)
+			res.send({"success": true, "result": resp.result})
+		}
+	})
+
+});
+
+
+
 
 module.exports = router;
