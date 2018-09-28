@@ -153,7 +153,7 @@ router.get('/:hashOrHeigth', function(req, res, next) {
 router.get('/:hash/raw', function(req, res, next) {
 
 	bitcoin_rpc.init(config.btc.host, config.btc.port, config.btc.username, config.btc.password)
-	bitcoin_rpc.call('getblock', [hash, 0], function (err, resp) {
+	bitcoin_rpc.call('getblock', [req.params.hash, 0], function (err, resp) {
 		if (err) {
 			res.send({"success": false, "msg": "Can't get the block info.", "err": err})
 		} else {
